@@ -15,7 +15,38 @@ A small multiplayer prototype: a Godot 4 client (HTML5-exportable) plus an autho
 
 ## Quick start
 
-Requires Node.js. First time only:
+** Create project folder **
+ - Git Pull: https://github.com/krafton-ewiersma/ltd.git
+
+**Godot 4.7.1**
+
+- Download **Godot 4.7.1**: https://godot-releases.nbg1.your-objectstorage.com/4.7.1-stable/Godot_v4.7.1-stable_win64.exe.zip
+- Download **Godot 4.7.1 Build Template**: https://godot-releases.nbg1.your-objectstorage.com/4.7.1-stable/Godot_v4.7.1-stable_export_templates.tpz
+- Ensure the following structure:
+  - /engine/Godot_v4.7.1-stable_export_templates.tpz
+  - /engine/Godot_v4.7.1-stable_win64.exe
+  - /engine/Godot_v4.7.1-stable_win64_console.exe
+
+## Web Build
+
+The `Web` export preset (`export_presets.cfg`) is already configured:
+
+- Thread support **off**, so the build runs from any plain HTTP server (no cross-origin isolation headers needed).
+- `exclude_filter` keeps `server/*` and `key.key` out of the shipped pack.
+- Output goes to `build/web/` (git-ignored; the `build/.gdignore` stops Godot importing its own export output).
+
+Rebuild after changes with Project > Export in the editor, or headless:
+
+```bash
+engine\Godot_v4.7.1-stable_win64.exe --headless --path . --export-release "Web" build/web/index.html
+```
+
+Export templates for 4.7.1 must be installed (Editor > Manage Export Templates, only the web templates are needed).
+
+Note for Web builds: a page served over **https** can only open **wss** (secure WebSocket) connections. For LAN/localhost testing, serve the exported page over plain **http**. The exported page can be hosted anywhere (e.g. itch.io); it only needs to reach the game server's IP and port.
+
+
+Server Requires Node.js. First time only:
 
 ```bash
 cd server
@@ -39,23 +70,6 @@ Three ways to get a client:
 - **Browser**: with `server.bat` running, open <http://localhost:8080> (uses the exported build in `build/web/`).
 - **Multiple local clients**: in the editor, Debug > **Customize Run Instances...** > Enable Multiple Instances (up to 4). Browser tabs and editor instances can join the same match.
 
-## Web export
-
-The `Web` export preset (`export_presets.cfg`) is already configured:
-
-- Thread support **off**, so the build runs from any plain HTTP server (no cross-origin isolation headers needed).
-- `exclude_filter` keeps `server/*` and `key.key` out of the shipped pack.
-- Output goes to `build/web/` (git-ignored; the `build/.gdignore` stops Godot importing its own export output).
-
-Rebuild after changes with Project > Export in the editor, or headless:
-
-```bash
-engine\Godot_v4.7.1-stable_win64.exe --headless --path . --export-release "Web" build/web/index.html
-```
-
-Export templates for 4.7.1 must be installed (Editor > Manage Export Templates, only the web templates are needed).
-
-Note for Web builds: a page served over **https** can only open **wss** (secure WebSocket) connections. For LAN/localhost testing, serve the exported page over plain **http**. The exported page can be hosted anywhere (e.g. itch.io); it only needs to reach the game server's IP and port.
 
 ## Protocol (JSON over WebSocket)
 
