@@ -12,12 +12,12 @@ function clamp(v, bound) {
 }
 
 class BotController {
-  constructor(count, bound) {
+  constructor(names, bound) {
     this.bound = bound;
     this.list = [];
-    for (let i = 0; i < count; i++) {
+    for (const name of names) {
       this.list.push({
-        name: `Bot ${i + 1}`,
+        name,
         accuracy: 0.35 + Math.random() * 0.65,
         reactionMs: 250 + Math.random() * 1750,
         aimAt: null, // timestamp of the next aim, null = nothing scheduled

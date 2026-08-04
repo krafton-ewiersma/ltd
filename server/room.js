@@ -44,7 +44,12 @@ class Room {
     this.auto = auto; // seeded by the server: recreated with same bots on game over
     this.cube = null;
     this.entities = new Map(); // id -> {id,name,bot,ws,color,x,z,tx,tz,score}
-    this.bots = new BotController(botCount, BOUND);
+    // Bots draw random names from the reserved list too; within a room the
+    // room name and every bot name are distinct (8 names = full 8-slot room).
+    const namePool = RESERVED_NAMES
+      .filter((n) => n.toLowerCase() !== name.toLowerCase())
+      .sort(() => Math.random() - 0.5);
+    this.bots = new BotController(namePool.slice(0, botCount), BOUND);
     for (const bot of this.bots.list) {
       bot.entity = this._addEntity(bot.name, true, null);
     }
