@@ -1,0 +1,15 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+engine
+key.key
+
+# Node.js server
+server/node_modules/
+
+# Export output
+build/*
+!build/.gdignore
+
+# Godot git plugin lock/temp files
+addons/godot-git-plugin/windows/~*

@@ -1,0 +1,343 @@
+[gd_scene format=3 uid="uid://bb3qaury4s7lu"]
+
+[ext_resource type="Script" uid="uid://cuisvrb723fk2" path="res://main.gd" id="1_main"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
+size = Vector2(40, 40)
+
+[sub_resource type="StandardMaterial3D" id="Mat_floor"]
+albedo_color = Color(0.55, 0.55, 0.58, 1)
+
+[node name="Main" type="Node3D" unique_id=1059822819]
+script = ExtResource("1_main")
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=913792644]
+transform = Transform3D(1.2188916, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_floor")
+surface_material_override/0 = SubResource("Mat_floor")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1091703205]
+transform = Transform3D(1, 0, 0, 0, 0.34202015, 0.9396926, 0, -0.9396926, 0.34202015, 0, 21.86942, 13.523647)
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=836076908]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+shadow_enabled = true
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=406797464]
+
+[node name="ConnectPanel" type="CenterContainer" parent="UI" unique_id=595873468]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="UI/ConnectPanel" unique_id=515694978]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="UI/ConnectPanel/Panel" unique_id=1359517404]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="UI/ConnectPanel/Panel/Margin" unique_id=1845170663]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="UI/ConnectPanel/Panel/Margin/VBox" unique_id=461725671]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "LTD - Connect"
+horizontal_alignment = 1
+
+[node name="IpEdit" type="LineEdit" parent="UI/ConnectPanel/Panel/Margin/VBox" unique_id=1351762726]
+unique_name_in_owner = true
+layout_mode = 2
+text = "127.0.0.1"
+placeholder_text = "Server IP"
+
+[node name="PortEdit" type="LineEdit" parent="UI/ConnectPanel/Panel/Margin/VBox" unique_id=400066383]
+unique_name_in_owner = true
+layout_mode = 2
+text = "8765"
+placeholder_text = "Port"
+
+[node name="NameEdit" type="LineEdit" parent="UI/ConnectPanel/Panel/Margin/VBox" unique_id=1615780613]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Your name (must be unique)"
+max_length = 16
+
+[node name="ConnectButton" type="Button" parent="UI/ConnectPanel/Panel/Margin/VBox" unique_id=200262786]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Connect"
+
+[node name="StatusLabel" type="Label" parent="UI/ConnectPanel/Panel/Margin/VBox" unique_id=1967613125]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LobbyPanel" type="Control" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+
+[node name="Margin" type="MarginContainer" parent="UI/LobbyPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Columns" type="HBoxContainer" parent="UI/LobbyPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LeftColumn" type="VBoxContainer" parent="UI/LobbyPanel/Margin/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.4
+theme_override_constants/separation = 8
+
+[node name="RoomsTitle" type="Label" parent="UI/LobbyPanel/Margin/Columns/LeftColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Game Rooms"
+
+[node name="RoomsPanel" type="PanelContainer" parent="UI/LobbyPanel/Margin/Columns/LeftColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Scroll" type="ScrollContainer" parent="UI/LobbyPanel/Margin/Columns/LeftColumn/RoomsPanel"]
+layout_mode = 2
+
+[node name="RoomList" type="VBoxContainer" parent="UI/LobbyPanel/Margin/Columns/LeftColumn/RoomsPanel/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="CreateTitle" type="Label" parent="UI/LobbyPanel/Margin/Columns/LeftColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Create Room"
+
+[node name="RoomNameEdit" type="LineEdit" parent="UI/LobbyPanel/Margin/Columns/LeftColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Room name"
+max_length = 20
+
+[node name="RoomPassEdit" type="LineEdit" parent="UI/LobbyPanel/Margin/Columns/LeftColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Password (optional)"
+secret = true
+max_length = 32
+
+[node name="MaxScoreRow" type="HBoxContainer" parent="UI/LobbyPanel/Margin/Columns/LeftColumn"]
+layout_mode = 2
+
+[node name="MaxScoreLabel" type="Label" parent="UI/LobbyPanel/Margin/Columns/LeftColumn/MaxScoreRow"]
+layout_mode = 2
+text = "Max score"
+
+[node name="MaxScoreSpin" type="SpinBox" parent="UI/LobbyPanel/Margin/Columns/LeftColumn/MaxScoreRow"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 10.0
+max_value = 50.0
+value = 20.0
+
+[node name="CreateButton" type="Button" parent="UI/LobbyPanel/Margin/Columns/LeftColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Create & Join"
+
+[node name="LobbyStatus" type="Label" parent="UI/LobbyPanel/Margin/Columns/LeftColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="RightColumn" type="VBoxContainer" parent="UI/LobbyPanel/Margin/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="PlayersTitle" type="Label" parent="UI/LobbyPanel/Margin/Columns/RightColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Players"
+
+[node name="PlayerList" type="ItemList" parent="UI/LobbyPanel/Margin/Columns/RightColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.0
+
+[node name="ChatTitle" type="Label" parent="UI/LobbyPanel/Margin/Columns/RightColumn"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Chat"
+
+[node name="ChatPanel" type="PanelContainer" parent="UI/LobbyPanel/Margin/Columns/RightColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.6
+
+[node name="ChatVBox" type="VBoxContainer" parent="UI/LobbyPanel/Margin/Columns/RightColumn/ChatPanel"]
+layout_mode = 2
+
+[node name="ChatLog" type="RichTextLabel" parent="UI/LobbyPanel/Margin/Columns/RightColumn/ChatPanel/ChatVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+scroll_following = true
+
+[node name="ChatRow" type="HBoxContainer" parent="UI/LobbyPanel/Margin/Columns/RightColumn/ChatPanel/ChatVBox"]
+layout_mode = 2
+
+[node name="ChatEdit" type="LineEdit" parent="UI/LobbyPanel/Margin/Columns/RightColumn/ChatPanel/ChatVBox/ChatRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Say something..."
+max_length = 200
+
+[node name="SendButton" type="Button" parent="UI/LobbyPanel/Margin/Columns/RightColumn/ChatPanel/ChatVBox/ChatRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Send"
+
+[node name="PasswordPanel" type="CenterContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+
+[node name="Panel" type="PanelContainer" parent="UI/PasswordPanel"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="UI/PasswordPanel/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="UI/PasswordPanel/Panel/Margin"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PwTitle" type="Label" parent="UI/PasswordPanel/Panel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Password required"
+horizontal_alignment = 1
+
+[node name="PwEdit" type="LineEdit" parent="UI/PasswordPanel/Panel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Password"
+secret = true
+max_length = 32
+
+[node name="PwButtons" type="HBoxContainer" parent="UI/PasswordPanel/Panel/Margin/VBox"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 10
+
+[node name="PwJoinButton" type="Button" parent="UI/PasswordPanel/Panel/Margin/VBox/PwButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Join"
+
+[node name="PwCancelButton" type="Button" parent="UI/PasswordPanel/Panel/Margin/VBox/PwButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cancel"
+
+[node name="GameUI" type="Control" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+visible = false
+
+[node name="ScoreLabel" type="Label" parent="UI/GameUI" unique_id=2000495473]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 316.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 20
+
+[node name="LeaveButton" type="Button" parent="UI/GameUI"]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = 48.0
+grow_horizontal = 0
+text = "Leave Room"
+
+[node name="ScoreboardPanel" type="CenterContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+
+[node name="Panel" type="PanelContainer" parent="UI/ScoreboardPanel"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="UI/ScoreboardPanel/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="UI/ScoreboardPanel/Panel/Margin"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ScoreboardTitle" type="Label" parent="UI/ScoreboardPanel/Panel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="ScoreboardText" type="Label" parent="UI/ScoreboardPanel/Panel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+
+[node name="ScoreboardClose" type="Button" parent="UI/ScoreboardPanel/Panel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back to Lobby"
